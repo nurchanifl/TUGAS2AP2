@@ -106,6 +106,11 @@ public class frmPelanggan extends javax.swing.JFrame {
         });
 
         btnbatal.setText("BATAL");
+        btnbatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbatalActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,8 +185,15 @@ public class frmPelanggan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsimpanActionPerformed
-        // TODO add your handling code here:
+        isiData();
+        resetForm();
+        tampilPelanggan();
     }//GEN-LAST:event_btnsimpanActionPerformed
+
+    private void btnbatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbatalActionPerformed
+        resetForm();
+        tampilPelanggan();
+    }//GEN-LAST:event_btnbatalActionPerformed
 
     /**
      * @param args the command line arguments

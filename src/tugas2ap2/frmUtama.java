@@ -143,12 +143,11 @@ public class frmUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_mnBrgActionPerformed
 
     private void mnPlgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnPlgActionPerformed
-       
-        ;
+       new frmPelanggan(this, true).setVisible(true);
     }//GEN-LAST:event_mnPlgActionPerformed
 
     private void mnSplActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSplActionPerformed
-        
+       new frmSuplier(this, true).setVisible(true); 
     }//GEN-LAST:event_mnSplActionPerformed
 
     private void mnAkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAkActionPerformed

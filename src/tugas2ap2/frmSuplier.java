@@ -1,21 +1,54 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tugas2ap2;
 
-/**
- *
- * @author L
- */
-public class frmSuplier extends javax.swing.JFrame {
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
-    /**
-     * Creates new form frmSuplier
-     */
-    public frmSuplier() {
+
+public class frmSuplier extends javax.swing.JFrame {
+    private ArrayList<entitasSupplier> listSupplier = new ArrayList<entitasSupplier>();
+    private DefaultTableModel tModel;
+    
+    public frmSuplier(java.awt.Frame parent, boolean modal) {
+        super(parent, "FORM ENTRI SUPPLIER");
         initComponents();
+        setLocationRelativeTo(this);
+        tampilList();
+    }
+    
+    private void tampilList()
+    {
+        String[] kolom = {"Kode","Nama","Alamat","Telepon","Nama Kontak"};
+        Object[][] o = new Object[listSupplier.size()][5];
+        int i = 0;
+        for(entitasSupplier n : listSupplier)
+        {
+            String[] arr = {n.getKode(),n.getNama(),n.getAlamat(),n.getTelepon(),n.getNamaKontak()};
+            o[i] = arr;
+            i++;
+        }
+        tModel = new DefaultTableModel(o,kolom);
+        tblSuplier.setModel(tModel);
+    }
+    
+    private void isiData()
+    {
+        entitasSupplier sup = new entitasSupplier();
+        sup.setKode(txtKode.getText());
+        sup.setNama(txtNama.getText());
+        sup.setAlamat(txtAlamat.getText());
+        sup.setTelepon(txtTelepon.getText());
+        sup.setNamaKontak(txtKontak.getText());
+        listSupplier.add(sup);
+    }
+    
+    private void resetForm()
+    {
+        txtKode.setText("");
+        txtNama.setText("");
+        txtAlamat.setText("");
+        txtTelepon.setText("");
+        txtKontak.setText("");
     }
 
     /**
@@ -30,16 +63,16 @@ public class frmSuplier extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtKode = new javax.swing.JTextField();
+        txtNama = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txtAlamat = new javax.swing.JTextField();
+        txtTelepon = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        txtKontak = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblSuplier = new javax.swing.JTable();
         btnsimpan = new javax.swing.JButton();
         btnbatal = new javax.swing.JButton();
 
@@ -57,7 +90,7 @@ public class frmSuplier extends javax.swing.JFrame {
 
         jLabel6.setText("Nama Kontak");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblSuplier.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -68,11 +101,21 @@ public class frmSuplier extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblSuplier);
 
         btnsimpan.setText("SIMPAN");
+        btnsimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsimpanActionPerformed(evt);
+            }
+        });
 
         btnbatal.setText("BATAL");
+        btnbatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbatalActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,25 +138,25 @@ public class frmSuplier extends javax.swing.JFrame {
                                         .addComponent(jLabel3)
                                         .addGap(15, 15, 15)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                                    .addComponent(jTextField1))
+                                    .addComponent(txtNama, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                                    .addComponent(txtKode))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField4)))
+                                        .addComponent(txtTelepon)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(47, 47, 47)
                                         .addComponent(jLabel6))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(36, 36, 36)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(txtKontak, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 15, Short.MAX_VALUE)
@@ -135,21 +178,21 @@ public class frmSuplier extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel4)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel6)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtKontak, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -161,6 +204,17 @@ public class frmSuplier extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnbatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbatalActionPerformed
+        isiData();
+        tampilList();
+        resetForm();
+    }//GEN-LAST:event_btnbatalActionPerformed
+
+    private void btnsimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsimpanActionPerformed
+        resetForm();
+        tampilList();
+    }//GEN-LAST:event_btnsimpanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,7 +246,14 @@ public class frmSuplier extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmSuplier().setVisible(true);
+                frmSuplier dialog = new frmSupplier(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
@@ -207,11 +268,11 @@ public class frmSuplier extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTable tblSuplier;
+    private javax.swing.JTextField txtAlamat;
+    private javax.swing.JTextField txtKode;
+    private javax.swing.JTextField txtKontak;
+    private javax.swing.JTextField txtNama;
+    private javax.swing.JTextField txtTelepon;
     // End of variables declaration//GEN-END:variables
 }
