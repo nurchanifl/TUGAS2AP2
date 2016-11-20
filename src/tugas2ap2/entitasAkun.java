@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entitas;
+package tugas2ap2;
 
 /**
  *
  * @author L
  */
-class entitasAkun {
+public class entitasAkun {
     private String user,nama,pass,status;
     
     public entitasAkun(){}

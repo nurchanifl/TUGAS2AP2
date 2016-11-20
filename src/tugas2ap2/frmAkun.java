@@ -2,9 +2,8 @@
 package tugas2ap2;
 
 import java.util.ArrayList;
-import java.awt.Frame;
 import javax.swing.table.DefaultTableModel;
-import entitas.entitasAkun;
+import java.awt.Frame;
 
 public class frmAkun extends javax.swing.JFrame {
 
@@ -18,6 +17,10 @@ public class frmAkun extends javax.swing.JFrame {
         cmbStatus.removeAllItems();
         cmbStatus.addItem("admin");
         cmbStatus.addItem("staff");
+    }
+
+    private frmAkun(Frame parent, String akun) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
    

@@ -1,22 +1,54 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tugas2ap2;
 
-/**
- *
- * @author L
- */
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
+
 public class frmPelanggan extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmPelanggan
-     */
-    public frmPelanggan() {
+    private final ArrayList<entitasPelanggan> listPelanggan = new ArrayList<entitasPelanggan>();
+    private DefaultTableModel tmodel;
+    public frmPelanggan(java.awt.Frame parent, boolean modal) {
+        super(parent, "FORM ENTRI PELANGGAN");
         initComponents();
+        setLocationRelativeTo(this);
+        resetForm();
+        tampilPelanggan();
     }
+    
+    private void tampilPelanggan()
+    {
+        String[] kolom = {"Kode","Nama Pelanggan","Alamat","Telepon"};
+        Object[][] o = new Object[listPelanggan.size()][4];
+        int i = 0;
+        for(entitasPelanggan n : listPelanggan)
+        {
+            String[] arr = {n.getKode(),n.getNama(),n.getAlamat(),n.getTelepon()};
+            o[i] = arr;
+            i++;
+        }
+        tmodel = new DefaultTableModel(o,kolom);
+        tblPelanggan.setModel(tmodel);
+    }
+    private void isiData()
+    {
+        entitasPelanggan plg = new entitasPelanggan();
+        plg.setKode(txtKode.getText());
+        plg.setNama(txtNama.getText());
+        plg.setAlamat(txtAlamat.getText());
+        plg.setTelepon(txtTelepon.getText());
+        listPelanggan.add(plg);
+    }
+    
+    private void resetForm()
+    {
+        txtKode.setText("");
+        txtNama.setText("");
+        txtAlamat.setText("");
+        txtTelepon.setText("");
+    }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,12 +64,12 @@ public class frmPelanggan extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        txtKode = new javax.swing.JTextField();
+        txtNama = new javax.swing.JTextField();
+        txtAlamat = new javax.swing.JTextField();
+        txtTelepon = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblPelanggan = new javax.swing.JTable();
         btnsimpan = new javax.swing.JButton();
         btnbatal = new javax.swing.JButton();
 
@@ -53,7 +85,7 @@ public class frmPelanggan extends javax.swing.JFrame {
 
         jLabel5.setText("Telpon");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblPelanggan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -64,7 +96,7 @@ public class frmPelanggan extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblPelanggan);
 
         btnsimpan.setText("SIMPAN");
         btnsimpan.addActionListener(new java.awt.event.ActionListener() {
@@ -93,18 +125,18 @@ public class frmPelanggan extends javax.swing.JFrame {
                                         .addComponent(jLabel3)
                                         .addGap(21, 21, 21)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                                    .addComponent(jTextField2))
+                                    .addComponent(txtKode, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                                    .addComponent(txtNama))
                                 .addGap(38, 38, 38)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextField4))))
+                                        .addComponent(txtTelepon))))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(139, 139, 139)
@@ -125,16 +157,16 @@ public class frmPelanggan extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtTelepon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -181,7 +213,14 @@ public class frmPelanggan extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmPelanggan().setVisible(true);
+                frmPelanggan dialog = new frmPelanggan(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
@@ -195,10 +234,10 @@ public class frmPelanggan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTable tblPelanggan;
+    private javax.swing.JTextField txtAlamat;
+    private javax.swing.JTextField txtKode;
+    private javax.swing.JTextField txtNama;
+    private javax.swing.JTextField txtTelepon;
     // End of variables declaration//GEN-END:variables
 }
